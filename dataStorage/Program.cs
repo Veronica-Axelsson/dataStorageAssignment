@@ -1,7 +1,7 @@
-﻿using dataStorage.Contexts;
+﻿//using dataStorage.Contexts;
 
-var context = new DataContext();
+//var context = new DataContext();
 
 ////Används till: ErrandTimeCreated, TimeEmployeeComment
-//var date2 = DateTime.Now;
-//Console.WriteLine(date2);
+var date2 = DateTime.Now;
+Console.WriteLine(date2);

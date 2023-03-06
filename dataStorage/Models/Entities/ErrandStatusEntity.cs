@@ -5,7 +5,7 @@ namespace dataStorage.Models.Entities
 {
     internal class ErrandStatusEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         [Column(TypeName = "nvarchar(100)")]

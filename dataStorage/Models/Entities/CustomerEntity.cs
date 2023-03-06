@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace dataStorage.Models.Entities
 {
+    [Index(nameof(Email), IsUnique = true)]
+
     internal class CustomerEntity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
@@ -16,9 +19,10 @@ namespace dataStorage.Models.Entities
         public string Email { get; set; } = null!;
 
 
-        public int PhoneNumberId { get; set; }
+        //public int PhoneNumberId { get; set; }
         public PhoneEntity PhoneNr { get; set; } = null!;
 
-        public ICollection<ErrandEntity> Errands = new HashSet<ErrandEntity>();
+
+        //public ICollection<ErrandEntity> Errands = new HashSet<ErrandEntity>();
     }
 }

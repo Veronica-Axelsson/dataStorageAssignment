@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using dataStorage.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace dataStorage.Contexts
 {
@@ -27,7 +28,12 @@ namespace dataStorage.Contexts
         #endregion
 
 
-    
+
+        public DbSet<CustomerEntity> Customers { get; set; } = null!;
+        public DbSet<ErrandEntity> Errands { get; set; } = null!;
+        public DbSet<ErrandStatusEntity> ErrandStatus { get; set; } = null!;
+        public DbSet<PhoneEntity> PhoneNumber { get; set; } = null!;
+
 
     }
 }
