@@ -58,11 +58,9 @@ namespace dataStorage.Migrations
 
             modelBuilder.Entity("dataStorage.Models.Entities.ErrandEntity", b =>
                 {
-                    b.Property<int>("ErrandId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ErrandId"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CustomerDescription")
                         .IsRequired()
@@ -75,8 +73,8 @@ namespace dataStorage.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ErrandStatusErrandId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ErrandStatusId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("ErrandTimeCreated")
                         .HasColumnType("datetime2");
@@ -84,11 +82,11 @@ namespace dataStorage.Migrations
                     b.Property<DateTime>("TimeEmployeeComment")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ErrandId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("ErrandStatusErrandId");
+                    b.HasIndex("ErrandStatusId");
 
                     b.ToTable("Errands");
                 });
@@ -144,7 +142,7 @@ namespace dataStorage.Migrations
 
                     b.HasOne("dataStorage.Models.Entities.ErrandEntity", "ErrandStatus")
                         .WithMany()
-                        .HasForeignKey("ErrandStatusErrandId")
+                        .HasForeignKey("ErrandStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

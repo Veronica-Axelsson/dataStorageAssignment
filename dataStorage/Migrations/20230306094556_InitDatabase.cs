@@ -60,18 +60,17 @@ namespace dataStorage.Migrations
                 name: "Errands",
                 columns: table => new
                 {
-                    ErrandId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ErrandTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CustomerDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TimeEmployeeComment = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EmployeeComment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ErrandStatusErrandId = table.Column<int>(type: "int", nullable: false),
+                    ErrandStatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Errands", x => x.ErrandId);
+                    table.PrimaryKey("PK_Errands", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Errands_Customers_CustomerId",
                         column: x => x.CustomerId,
@@ -79,10 +78,10 @@ namespace dataStorage.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Errands_Errands_ErrandStatusErrandId",
-                        column: x => x.ErrandStatusErrandId,
+                        name: "FK_Errands_Errands_ErrandStatusId",
+                        column: x => x.ErrandStatusId,
                         principalTable: "Errands",
-                        principalColumn: "ErrandId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
 
@@ -103,9 +102,9 @@ namespace dataStorage.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Errands_ErrandStatusErrandId",
+                name: "IX_Errands_ErrandStatusId",
                 table: "Errands",
-                column: "ErrandStatusErrandId");
+                column: "ErrandStatusId");
         }
 
         /// <inheritdoc />

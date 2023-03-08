@@ -4,8 +4,7 @@ namespace dataStorage.Models.Entities
 {
     internal class ErrandEntity 
     {
-        [Key]
-        public int ErrandId { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public DateTime ErrandTimeCreated { get; set; }
         public string CustomerDescription { get; set; } = null!;
