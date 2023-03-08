@@ -19,7 +19,7 @@ namespace dataStorage.Models.Entities
         public string Email { get; set; } = null!;
 
 
-        //public int PhoneNumberId { get; set; }
+        public int PhoneNumberId { get; set; }
         public PhoneEntity PhoneNr { get; set; } = null!;
 
 

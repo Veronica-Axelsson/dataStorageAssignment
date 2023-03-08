@@ -13,10 +13,14 @@ namespace dataStorage.Models.Entities
 
 
         //public int ErrandsStatusId { get; set; }
-        public ErrandEntity ErrandStatus { get; set; } = null!;
+        public ErrandStatusEntity ErrandStatus { get; set; } = null!;
 
 
         //public int CustomersId { get; set; }
         public CustomerEntity Customer { get; set; } = null!;
+
+
+        //public int ErrandsStatusId { get; set; }
+        public PhoneEntity PhoneNr { get; set; } = null!;
     }
 }

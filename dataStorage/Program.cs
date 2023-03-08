@@ -18,19 +18,19 @@ while (true)
         case "1":
             //Skapa nytt ärende
             Console.Clear();
-            await menu.CreateNewContactAsync();
+            await menu.CreateNewErrandAsync();
             break;
 
         case "2":
             //Visa alla ärenden
             Console.Clear();
-            await menu.ListAllContactsAsync();
+            await menu.ListAllErrandsAsync();
             break;
 
         case "3":
             // se ett specifikt ärende. ------ kunna se ett ärende och se kommentarer kopplat till ärendet
             Console.Clear();
-            await menu.ListSpecificContactAsync();
+            await menu.ListSpecificErrandAsync();
             break;
 
         case "4":
