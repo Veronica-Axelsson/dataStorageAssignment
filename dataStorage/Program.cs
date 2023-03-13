@@ -5,6 +5,7 @@ var menu = new MenuService();
 while (true)
 {
     Console.Clear();
+    Console.WriteLine("Fastighet AB ärendehanteringssystem");
     Console.WriteLine("1. Skapa en nytt ärende");
     Console.WriteLine("2. Visa alla ärenden");
     Console.WriteLine("3. Visa en specifik ärende");
@@ -28,7 +29,7 @@ while (true)
             break;
 
         case "3":
-            // se ett specifikt ärende. ------ kunna se ett ärende och se kommentarer kopplat till ärendet
+            // se ett specifikt ärende.
             Console.Clear();
             await menu.ListSpecificErrandAsync();
             break;

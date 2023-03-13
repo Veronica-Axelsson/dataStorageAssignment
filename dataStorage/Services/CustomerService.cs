@@ -60,7 +60,7 @@ namespace dataStorage.Services
                 };
 
             if (_statusEntity != null)
-                _errandEntity.Customer.Id = _statusEntity.Id;
+                _errandEntity.Customer.Id = _statusEntity.Id; //?
             else
                 _errandEntity.ErrandStatus = new ErrandStatusEntity
                 {
@@ -84,10 +84,10 @@ namespace dataStorage.Services
                     FirstName = _errand.Customer.FirstName,
                     LastName = _errand.Customer.LastName,
                     Email = _errand.Customer.Email,
-                    //CustomerPhoneNr = _errand.PhoneNr,
+                    CustomerPhoneNr = _errand.PhoneNr.CustomerPhoneNr,
                     ErrandTimeCreated = _errand.ErrandTimeCreated,
                     CustomerDescription = _errand.CustomerDescription,
-                    //Status = _errand.ErrandStatus,
+                    Status = _errand.ErrandStatus.Status,
                     TimeEmployeeComment = _errand.TimeEmployeeComment,
                     EmployeeComment = _errand.EmployeeComment   
                 });
@@ -107,10 +107,10 @@ namespace dataStorage.Services
                     FirstName = _errand.Customer.FirstName,
                     LastName = _errand.Customer.LastName,
                     Email = _errand.Customer.Email,
-                    //CustomerPhoneNr = _errand.PhoneNr,
+                    CustomerPhoneNr = _errand.PhoneNr.CustomerPhoneNr,
                     ErrandTimeCreated = _errand.ErrandTimeCreated,
                     CustomerDescription = _errand.CustomerDescription,
-                    //Status = _errand.ErrandStatus,
+                    Status = _errand.ErrandStatus.Status,
                     TimeEmployeeComment = _errand.TimeEmployeeComment,
                     EmployeeComment = _errand.EmployeeComment
                 };
@@ -121,30 +121,20 @@ namespace dataStorage.Services
 
         public static async Task UpdateAsync(Errands errands)
         {
-            var _errandsEntity = await _context.Errands.Include(x => x.Id).FirstOrDefaultAsync(x => x.Id == errands.Id);
+            var _errandsEntity = await _context.ErrandStatus.Include(x => x.Status).FirstOrDefaultAsync(x => x.Id == errands.Id);
 
             if (_errandsEntity != null)
             {
                 //Errand status -----------------------------------------
                 if (!string.IsNullOrEmpty(errands.Status))
-                    _errandsEntity.ErrandStatus = errands.Status;
-
-      
+                {
+                    _errandsEntity.Status = errands.Status;
+                }
+                    
                 _context.Update(_errandsEntity);
                 await _context.SaveChangesAsync();
             }
         }
 
-
-        //public static async Task DeleteAsync(string email)
-        //{
-        //    var customer = await _context.Customers.Include(x => x.Address).FirstOrDefaultAsync(x => x.Email == email);
-
-        //    if (customer != null)
-        //    {
-        //        _context.Remove(customer);
-        //        await _context.SaveChangesAsync();
-        //    }
-        //}
     }
 }

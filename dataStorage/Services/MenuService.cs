@@ -26,11 +26,11 @@ namespace dataStorage.Services
             errands.CustomerDescription = Console.ReadLine() ?? "";
 
             //Creates automatic --------------------
-            //Time errand created
-            errands.ErrandTimeCreated = DateTime.Now;
+            ////Time errand created
+            //errands.ErrandTimeCreated = DateTime.Now;
 
-            //The status of the errand
-            errands.Status = "Ej påbörjad";
+            ////The status of the errand
+            //errands.Status = "Ej påbörjad";
 
             //Save errand to database
             await CustomerService.SaveAsync(errands);
@@ -165,11 +165,15 @@ namespace dataStorage.Services
 
                     //update specific errand to database
                     await CustomerService.UpdateAsync(_errands);
+                } else
+                {
+                    Console.WriteLine($"Hittade inte någon kund med angivna id.");
+                    Console.WriteLine("");
                 }
-            }
-            else
+
+            } else
             {
-                Console.WriteLine($"Hittade inte någon kund med den angivna e-postadressen.");
+                Console.WriteLine($"Ingen id angiven.");
                 Console.WriteLine("");
             }
 

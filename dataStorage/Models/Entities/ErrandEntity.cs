@@ -21,6 +21,8 @@ namespace dataStorage.Models.Entities
 
 
         //public int ErrandsStatusId { get; set; }
+
+        //public int PhoneNrID2 { get; set; }
         public PhoneEntity PhoneNr { get; set; } = null!;
     }
 }

@@ -28,6 +28,9 @@ namespace dataStorage.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CustomerPhoneNrId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -43,15 +46,15 @@ namespace dataStorage.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("PhoneNrId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("PhoneNr")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerPhoneNrId");
+
                     b.HasIndex("Email")
                         .IsUnique();
-
-                    b.HasIndex("PhoneNrId");
 
                     b.ToTable("Customers");
                 });
@@ -79,6 +82,9 @@ namespace dataStorage.Migrations
                     b.Property<DateTime>("ErrandTimeCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("PhoneNrId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("TimeEmployeeComment")
                         .HasColumnType("datetime2");
 
@@ -87,6 +93,8 @@ namespace dataStorage.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("ErrandStatusId");
+
+                    b.HasIndex("PhoneNrId");
 
                     b.ToTable("Errands");
                 });
@@ -123,13 +131,13 @@ namespace dataStorage.Migrations
 
             modelBuilder.Entity("dataStorage.Models.Entities.CustomerEntity", b =>
                 {
-                    b.HasOne("dataStorage.Models.Entities.PhoneEntity", "PhoneNr")
+                    b.HasOne("dataStorage.Models.Entities.PhoneEntity", "CustomerPhoneNr")
                         .WithMany()
-                        .HasForeignKey("PhoneNrId")
+                        .HasForeignKey("CustomerPhoneNrId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PhoneNr");
+                    b.Navigation("CustomerPhoneNr");
                 });
 
             modelBuilder.Entity("dataStorage.Models.Entities.ErrandEntity", b =>
@@ -140,15 +148,23 @@ namespace dataStorage.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("dataStorage.Models.Entities.ErrandEntity", "ErrandStatus")
+                    b.HasOne("dataStorage.Models.Entities.ErrandStatusEntity", "ErrandStatus")
                         .WithMany()
                         .HasForeignKey("ErrandStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("dataStorage.Models.Entities.PhoneEntity", "PhoneNr")
+                        .WithMany()
+                        .HasForeignKey("PhoneNrId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Customer");
 
                     b.Navigation("ErrandStatus");
+
+                    b.Navigation("PhoneNr");
                 });
 #pragma warning restore 612, 618
         }

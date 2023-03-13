@@ -5,7 +5,7 @@ namespace dataStorage.Contexts
 {
     internal class DataContext : DbContext
     {
-        private readonly string _connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\mille\Dropbox\EC-Utbildning\Datalagring\Assignment\dataStorageAssignment\dataStorage\Contexts\sql_database.mdf;Integrated Security=True;Connect Timeout=30";
+        private readonly string _connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\mille\Dropbox\EC-Utbildning\Datalagring\Assignment\dataStorageAssignment\dataStorage\Contexts\sql-database003.mdf;Integrated Security=True;Connect Timeout=30";
 
         #region constructors
         public DataContext()

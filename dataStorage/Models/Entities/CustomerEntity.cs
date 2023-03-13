@@ -19,10 +19,10 @@ namespace dataStorage.Models.Entities
         public string Email { get; set; } = null!;
 
 
-        public int PhoneNumberId { get; set; }
-        public PhoneEntity PhoneNr { get; set; } = null!;
+        public int PhoneNr { get; set; }
+        public PhoneEntity CustomerPhoneNr { get; set; } = null!;
 
 
-        //public ICollection<ErrandEntity> Errands = new HashSet<ErrandEntity>();
+        public ICollection<ErrandEntity> Errands = new HashSet<ErrandEntity>();
     }
 }
