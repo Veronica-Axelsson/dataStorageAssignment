@@ -7,7 +7,6 @@ namespace dataStorage.Models.Entities
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [Required]
         [Column(TypeName = "nvarchar(100)")]
         public string Status { get; set; } = null!;
 

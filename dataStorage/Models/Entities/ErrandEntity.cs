@@ -8,21 +8,23 @@ namespace dataStorage.Models.Entities
 
         public DateTime ErrandTimeCreated { get; set; }
         public string CustomerDescription { get; set; } = null!;
-        public DateTime TimeEmployeeComment { get; set; }
-        public string EmployeeComment { get; set; } = null!;
 
 
-        //public int ErrandsStatusId { get; set; }
-        public ErrandStatusEntity ErrandStatus { get; set; } = null!;
+        //public Guid CommentId { get; set; }
+        //public CommentEntity EmployeeComment { get; set; } = null!;
 
 
-        //public int CustomersId { get; set; }
+        public Guid CustomerId { get; set; }
         public CustomerEntity Customer { get; set; } = null!;
 
 
-        //public int ErrandsStatusId { get; set; }
+        public Guid ErrandStatusId { get; set; }
+        public ErrandStatusEntity ErrandStatus { get; set; } = null!;
 
-        //public int PhoneNrID2 { get; set; }
-        public PhoneEntity PhoneNr { get; set; } = null!;
+
+        //public Guid CustomerPhoneNrId { get; set; }
+        //public PhoneEntity CustomerPhoneNr { get; set; } = null!;
+
+
     }
 }

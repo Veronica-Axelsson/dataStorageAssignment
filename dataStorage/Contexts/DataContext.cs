@@ -5,7 +5,7 @@ namespace dataStorage.Contexts
 {
     internal class DataContext : DbContext
     {
-        private readonly string _connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\mille\Dropbox\EC-Utbildning\Datalagring\Assignment\dataStorageAssignment\dataStorage\Contexts\sql-database003.mdf;Integrated Security=True;Connect Timeout=30";
+        private readonly string _connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\mille\Dropbox\EC-Utbildning\Datalagring\Assignment\dataStorageAssignment\dataStorage\Contexts\sql_db.mdf;Integrated Security=True;Connect Timeout=30";
 
         #region constructors
         public DataContext()
@@ -32,7 +32,7 @@ namespace dataStorage.Contexts
         public DbSet<CustomerEntity> Customers { get; set; } = null!;
         public DbSet<ErrandEntity> Errands { get; set; } = null!;
         public DbSet<ErrandStatusEntity> ErrandStatus { get; set; } = null!;
-        public DbSet<PhoneEntity> PhoneNumber { get; set; } = null!;
+        //public DbSet<CommentEntity> CommentEntity { get; set; } = null!;
 
 
     }

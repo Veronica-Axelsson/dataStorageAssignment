@@ -12,7 +12,7 @@ using dataStorage.Contexts;
 namespace dataStorage.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230313092350_InitDatabase")]
+    [Migration("20230316085414_InitDatabase")]
     partial class InitDatabase
     {
         /// <inheritdoc />
@@ -31,8 +31,10 @@ namespace dataStorage.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CustomerPhoneNrId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("CustomerPhoneNr")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -49,12 +51,7 @@ namespace dataStorage.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("PhoneNr")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerPhoneNrId");
 
                     b.HasIndex("Email")
                         .IsUnique();
@@ -75,20 +72,10 @@ namespace dataStorage.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("EmployeeComment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("ErrandStatusId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("ErrandTimeCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("PhoneNrId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("TimeEmployeeComment")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -96,8 +83,6 @@ namespace dataStorage.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("ErrandStatusId");
-
-                    b.HasIndex("PhoneNrId");
 
                     b.ToTable("Errands");
                 });
@@ -117,32 +102,6 @@ namespace dataStorage.Migrations
                     b.ToTable("ErrandStatus");
                 });
 
-            modelBuilder.Entity("dataStorage.Models.Entities.PhoneEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CustomerPhoneNr")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PhoneNumber");
-                });
-
-            modelBuilder.Entity("dataStorage.Models.Entities.CustomerEntity", b =>
-                {
-                    b.HasOne("dataStorage.Models.Entities.PhoneEntity", "CustomerPhoneNr")
-                        .WithMany()
-                        .HasForeignKey("CustomerPhoneNrId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CustomerPhoneNr");
-                });
-
             modelBuilder.Entity("dataStorage.Models.Entities.ErrandEntity", b =>
                 {
                     b.HasOne("dataStorage.Models.Entities.CustomerEntity", "Customer")
@@ -157,17 +116,9 @@ namespace dataStorage.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("dataStorage.Models.Entities.PhoneEntity", "PhoneNr")
-                        .WithMany()
-                        .HasForeignKey("PhoneNrId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Customer");
 
                     b.Navigation("ErrandStatus");
-
-                    b.Navigation("PhoneNr");
                 });
 #pragma warning restore 612, 618
         }

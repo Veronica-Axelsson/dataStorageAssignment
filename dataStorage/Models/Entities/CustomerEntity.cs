@@ -18,9 +18,12 @@ namespace dataStorage.Models.Entities
         [StringLength(100)]
         public string Email { get; set; } = null!;
 
+        [StringLength(20)]
+        public string CustomerPhoneNr { get; set; } = null!;
 
-        public int PhoneNr { get; set; }
-        public PhoneEntity CustomerPhoneNr { get; set; } = null!;
+
+        //public Guid CustomerPhoneNrId2 { get; set; }
+        //public PhoneEntity CustomerPhoneNr { get; set; } = null!;
 
 
         public ICollection<ErrandEntity> Errands = new HashSet<ErrandEntity>();
