@@ -12,7 +12,7 @@ using dataStorage.Contexts;
 namespace dataStorage.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230316085414_InitDatabase")]
+    [Migration("20230318093900_InitDatabase")]
     partial class InitDatabase
     {
         /// <inheritdoc />

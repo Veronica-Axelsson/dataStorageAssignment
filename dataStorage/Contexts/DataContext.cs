@@ -32,8 +32,5 @@ namespace dataStorage.Contexts
         public DbSet<CustomerEntity> Customers { get; set; } = null!;
         public DbSet<ErrandEntity> Errands { get; set; } = null!;
         public DbSet<ErrandStatusEntity> ErrandStatus { get; set; } = null!;
-        //public DbSet<CommentEntity> CommentEntity { get; set; } = null!;
-
-
     }
 }

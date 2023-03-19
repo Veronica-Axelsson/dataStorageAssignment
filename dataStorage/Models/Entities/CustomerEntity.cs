@@ -22,10 +22,6 @@ namespace dataStorage.Models.Entities
         public string CustomerPhoneNr { get; set; } = null!;
 
 
-        //public Guid CustomerPhoneNrId2 { get; set; }
-        //public PhoneEntity CustomerPhoneNr { get; set; } = null!;
-
-
         public ICollection<ErrandEntity> Errands = new HashSet<ErrandEntity>();
     }
 }

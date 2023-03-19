@@ -17,28 +17,7 @@ namespace dataStorage.Services
                 CustomerDescription = errand.CustomerDescription,
             };
 
-            //var _customerEntity = new CustomerEntity
-            //{
-            //    FirstName = errand.FirstName,
-            //    LastName = errand.LastName,
-            //    Email = errand.Email,
-            //};
-
-            //var _statusEntity = new ErrandStatusEntity
-            //{
-            //    Status = errand.Status
-            //};
-
-            //var _phoneEntity = new PhoneEntity
-            //{
-            //    CustomerPhoneNr = errand.CustomerPhoneNr
-            //};
-
             var _customerEntity = await _context.Customers.FirstOrDefaultAsync(x => x.FirstName == errand.FirstName && x.LastName == errand.LastName && x.Email == errand.Email && x.CustomerPhoneNr == errand.CustomerPhoneNr);
-            //var _phoneEntity = await _context.PhoneNumber.FirstOrDefaultAsync(x => x.CustomerPhoneNr == errand.CustomerPhoneNr);
-            var _statusEntity = await _context.ErrandStatus.FirstOrDefaultAsync(x => x.Status == errand.Status);
-            //var _commentEntity = await _context.CommentEntity.FirstOrDefaultAsync(x => x.TimeEmployeeComment == errand.TimeEmployeeComment && x.EmployeeComment == errand.EmployeeComment );
-
 
             if (_customerEntity != null)
                 _errandEntity.Customer.Id = _customerEntity.Id;
@@ -49,8 +28,9 @@ namespace dataStorage.Services
                     LastName = errand.LastName,
                     Email = errand.Email,
                     CustomerPhoneNr = errand.CustomerPhoneNr
-
                 };
+
+            var _statusEntity = await _context.ErrandStatus.FirstOrDefaultAsync(x => x.Status == errand.Status);
 
             if (_statusEntity != null)
                 _errandEntity.ErrandStatus.Id = _statusEntity.Id;
@@ -60,7 +40,6 @@ namespace dataStorage.Services
                     Status = errand.Status
                 };
 
-
             _context.Add(_errandEntity);
             await _context.SaveChangesAsync();
         }
@@ -69,7 +48,6 @@ namespace dataStorage.Services
         public static async Task<IEnumerable<Errands>> GetAllAsync()
         {
             var _errands = new List<Errands>();
-
 
             foreach (var _errand in await _context.Errands.Include(x => x.Customer).Include(x => x.ErrandStatus).ToListAsync())
                 _errands.Add(new Errands
@@ -81,9 +59,7 @@ namespace dataStorage.Services
                     CustomerPhoneNr = _errand.Customer.CustomerPhoneNr,
                     ErrandTimeCreated = _errand.ErrandTimeCreated,
                     CustomerDescription = _errand.CustomerDescription,
-                    Status = _errand.ErrandStatus.Status,
-                    //TimeEmployeeComment = _errand.EmployeeComment.TimeEmployeeComment,
-                    //EmployeeComment = _errand.EmployeeComment.EmployeeComment   
+                    Status = _errand.ErrandStatus.Status, 
                 });
 
             return _errands;
@@ -105,8 +81,6 @@ namespace dataStorage.Services
                     ErrandTimeCreated = _errand.ErrandTimeCreated,
                     CustomerDescription = _errand.CustomerDescription,
                     Status = _errand.ErrandStatus.Status,
-                    //TimeEmployeeComment = _errand.EmployeeComment.TimeEmployeeComment,
-                    //EmployeeComment = _errand.EmployeeComment.EmployeeComment
                 };
             else
                 return null!;
@@ -116,7 +90,6 @@ namespace dataStorage.Services
         public static async Task UpdateAsync(Errands errands)
         {
             var _errand = await _context.Errands.Include(x => x.ErrandStatus).FirstOrDefaultAsync(x => x.Id == errands.Id);
-
 
             if (_errand != null)
             {

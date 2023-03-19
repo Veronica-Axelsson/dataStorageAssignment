@@ -10,8 +10,7 @@ while (true)
     Console.WriteLine("2. Visa alla ärenden");
     Console.WriteLine("3. Visa en specifik ärende");
     Console.WriteLine("4. Uppdatera status på ett ärende");
-    //Console.WriteLine("5. Kommentera ett specifikt ärende");
-    Console.WriteLine("6. Avsluta programmet");
+    Console.WriteLine("5. Avsluta programmet");
     Console.Write("Välj ett av följande alternativ (1-6: ");
 
     switch (Console.ReadLine())
@@ -40,13 +39,7 @@ while (true)
             await menu.UpdateStatusAsync();
             break;
 
-        //case "5":
-        //    // Kommentera ett specifikt ärende
-        //    Console.Clear();
-        //    await menu.CreateNewCommentAsync();
-        //    break;
-
-        case "6":
+        case "5":
             // Programmet avslutas
             Console.Clear();
             Console.WriteLine("Programmet avslutas");

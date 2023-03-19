@@ -62,7 +62,7 @@ namespace dataStorage.Migrations
                         column: x => x.ErrandStatusId,
                         principalTable: "ErrandStatus",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

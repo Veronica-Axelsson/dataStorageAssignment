@@ -1,10 +1,11 @@
 ﻿using dataStorage.Models;
+using System.Text;
 
 namespace dataStorage.Services
 {
     internal class MenuService
     {
-        public async Task CreateNewErrandAsync()              //Skapa ny kontakt
+        public async Task CreateNewErrandAsync()
         {
             var errands = new Errands();
 
@@ -30,57 +31,29 @@ namespace dataStorage.Services
             errands.ErrandTimeCreated = DateTime.Now;
 
             //The status of the errand
-            errands.Status = "Ej påbörjad";
+            //Console.Write("Beskrivning av status: ");
+            //errands.Status = Console.ReadLine() ?? "";
+            //var textstatus = "Ej påbörjad";
+            //errands.Status = "Ej påbörjad";
 
-            //errands.EmployeeComment = "";
+
+            //Console.Write("Beskrivning av status: ");
+            errands.Status = "Ej påbörjad.";
+
 
             //Save errand to database
             await CustomerService.SaveAsync(errands);
         }
 
-        //public async Task CreateNewCommentAsync()              //Skapa ny kontakt
-        //{
-        //    var errands = new Errands();
-
-        //    // // Söka efter ett ärende
-        //    Console.Write("Skriv ärendets id-nummer: ");
-        //    var answer = Console.ReadLine();
-
-        //    if (answer != null)
-        //    {
-        //        answer = answer.ToLower();
-
-        //        if (answer == errands.Id.ToString())
-        //        {
-        //            //Kommentera ärendet
-        //            Console.Write("Kommentera ärendet: ");
-        //            errands.EmployeeComment = Console.ReadLine() ?? "";
-        //        }
-
-        //        else
-        //        {
-        //            Console.WriteLine("Fel id-nummer");
-        //        } 
-        //    }
-           
-        //    //Creates automatic --------------------
-        //    //Time errand created
-        //    errands.TimeEmployeeComment = DateTime.Now;
-
-        //    //save errand to database
-        //    await CustomerService.SaveAsync(errands);
-        //}
-
         public async Task ListAllErrandsAsync()
         {
-            ////get all errands from database
+            //get all errands from database
             var errands = await CustomerService.GetAllAsync();
 
             Console.WriteLine("Visar alla ärenden. \n");
 
             if (errands.Any())
             {
-
                 foreach (Errands _errand in errands)
                 {
                     Console.WriteLine($"Ärendenummer: {_errand.Id}");
@@ -103,15 +76,7 @@ namespace dataStorage.Services
                     }
                     else
                         Console.WriteLine($"Ärende status: {_errand.Status}");
-
-
-                    //if (!string.IsNullOrEmpty(_errand.EmployeeComment))
-                    //{
-                    //    Console.WriteLine($"Kommentar datum: {_errand.TimeEmployeeComment}");
-                    //    Console.WriteLine($"Kommentar: {_errand.EmployeeComment}");
-                    //}
-
-                    Console.WriteLine("");
+                        Console.WriteLine("");
                 }
             }
             else
@@ -119,7 +84,7 @@ namespace dataStorage.Services
                 Console.WriteLine("Inga ärenden finns i databasen.");
                 Console.WriteLine("");
             }
-        }            //Visa alla ärenden
+        }
 
         public async Task ListSpecificErrandAsync()
         {
@@ -137,20 +102,13 @@ namespace dataStorage.Services
 
                     if (_errand != null)
                     {
-                        Console.WriteLine($"Kundnummer: {_errand.Id}");
+                        Console.WriteLine($"Ärendenummer: {_errand.Id}");
                         Console.WriteLine($"Namn: {_errand.FirstName} {_errand.LastName}");
                         Console.WriteLine($"E-postadress: {_errand.Email}");
                         Console.WriteLine($"Telefonnummer: {_errand.CustomerPhoneNr}");
                         Console.WriteLine($"Ärende datum: {_errand.ErrandTimeCreated}");
                         Console.WriteLine($"Beskrivning av ärendet: : {_errand.CustomerDescription}");
                         Console.WriteLine($"Ärende status: {_errand.Status}");
-
-                        //if (!string.IsNullOrEmpty(_errand.EmployeeComment))
-                        //{
-                        //    Console.WriteLine($"Kommentar datum: {_errand.TimeEmployeeComment}");
-                        //    Console.WriteLine($"Kommentar: {_errand.EmployeeComment}");
-                        //}
-
                         Console.WriteLine("");
                     }
                     else
@@ -166,8 +124,12 @@ namespace dataStorage.Services
                     Console.WriteLine("");
                 }
             }
+            else 
+            { 
+                Console.WriteLine("Inget"); 
+            }
 
-        }        // Visa en specifik kontakt
+        }
 
         public async Task UpdateStatusAsync()
         {
@@ -205,7 +167,7 @@ namespace dataStorage.Services
                 }
             }
 
-        }      // Uppdatera ett ärende
+        }
 
     }
 }
