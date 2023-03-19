@@ -31,15 +31,7 @@ namespace dataStorage.Services
             errands.ErrandTimeCreated = DateTime.Now;
 
             //The status of the errand
-            //Console.Write("Beskrivning av status: ");
-            //errands.Status = Console.ReadLine() ?? "";
-            //var textstatus = "Ej påbörjad";
-            //errands.Status = "Ej påbörjad";
-
-
-            //Console.Write("Beskrivning av status: ");
             errands.Status = "Ej påbörjad.";
-
 
             //Save errand to database
             await CustomerService.SaveAsync(errands);
@@ -75,8 +67,10 @@ namespace dataStorage.Services
                         Console.WriteLine("Ärende status hittades inte");
                     }
                     else
-                        Console.WriteLine($"Ärende status: {_errand.Status}");
-                        Console.WriteLine("");
+                    {
+                        Console.WriteLine($"Ärende status: {_errand.Status}");     
+                    }
+                    Console.WriteLine("");
                 }
             }
             else
@@ -97,7 +91,7 @@ namespace dataStorage.Services
 
                 if (!string.IsNullOrEmpty(newGuid.ToString()))
                 {
-                    //get specific customer+address from database
+                    //get specific errand from database
                     var _errand = await CustomerService.GetAsync(newGuid);
 
                     if (_errand != null)
